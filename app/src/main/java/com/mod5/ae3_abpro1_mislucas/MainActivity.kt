@@ -4,21 +4,36 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.widget.Button
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        //setContentView(R.layout.activity_main)
+        setContentView(R.layout.main_splash)
+        val buttonStartApp: Button = findViewById(R.id.buttonStartApp)
+        buttonStartApp.setOnClickListener {
+            setupMainLayout() // Llama a la función que inicializa la interfaz principal
+        }
+    }
+
+    /**
+     * Carga el layout principal de la aplicación y configura la navegación.
+     * Esta función se llama después de que el usuario hace clic en "Comenzar" en el splash.
+     */
+    private fun setupMainLayout() {
+        // Carga el layout principal de la aplicación (fragment_container + bottom_navigation)
         setContentView(R.layout.activity_main)
 
-        // Carga el fragmento inicial al crear la Activity
-        if (savedInstanceState == null) {
+        // Carga el fragmento inicial (Lista de Transacciones)
+        if (supportFragmentManager.findFragmentById(R.id.fragment_container) == null) {
             // Pasamos addToBackStack = false para que al presionar atrás no salga de la app en la vista principal
             loadFragment(ListaTransaccionesFragment.newInstance(), addToBackStack = false)
         }
 
-        // Obtener la referencia a la barra de navegación inferior usando findViewById
+        // Obtener la referencia a la barra de navegación inferior
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
         // Configura el listener para la BottomNavigationView
@@ -36,12 +51,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
+//**************
     /**
      * Gestiona la navegación entre Fragmentos.
      * @param fragment Nuevo Fragmento a mostrar.
-     * @param addToBackStack Si se añade la transacción a la pila "Atrás". Por defecto es true
-     * para permitir volver al Fragmento anterior.
+     * @param addToBackStack Por defecto es true, para permitir volver al Fragmento anterior.
      */
     fun loadFragment(fragment: Fragment, addToBackStack: Boolean = true) {
         val transaction = supportFragmentManager.beginTransaction()
