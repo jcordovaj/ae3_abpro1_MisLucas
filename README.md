@@ -155,9 +155,7 @@ a. **Clonar el repositorio:**
 
 ```bash
 
-
-https://github.com/jcordovaj/ae3_abp1_GesTareaV3.git
-
+https://github.com/jcordovaj/ae3_abpro1_MisLucas.git
 
 ```
 
