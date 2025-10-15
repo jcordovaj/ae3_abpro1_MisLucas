@@ -13,9 +13,10 @@ import java.text.NumberFormat
 import java.util.*
 
 class TransactionAdapter(
-    private val onEdit: (Transaction) -> Unit,
+    private val onEdit  : (Transaction) -> Unit,
     private val onDelete: (Transaction) -> Unit
-) : ListAdapter<Transaction, TransactionAdapter.TransactionViewHolder>(TransactionDiffCallback()) {
+) : ListAdapter<Transaction,
+        TransactionAdapter.TransactionViewHolder>(TransactionDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TransactionViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -38,25 +39,26 @@ class TransactionAdapter(
         private val btnDelete: ImageView = itemView.findViewById(R.id.btnDelete)
 
         fun bind(transaction: Transaction) {
-            tvTitle.text = transaction.title
-            tvDate.text = "${transaction.date} - ${transaction.time}"
+            tvTitle.text    = transaction.title
+            tvDate.text     = "${transaction.date} - ${transaction.time}"
             tvCategory.text = transaction.category
 
-            // Usamos formato de moneda local
-            val currencyFormat = NumberFormat.getCurrencyInstance(Locale("es", "CL"))
+            // Usamos formato de moneda local, permite cambiar la localización por país
+            val currencyFormat =
+                NumberFormat.getCurrencyInstance(Locale("es", "CL"))
             tvAmount.text = currencyFormat.format(transaction.amount)
 
-            // Colores e íconos basados en el tipo de transacción
+            // Gestiona colores e íconos basados en el tipo de transacción
             if (transaction.type == "Ingreso") {
-                tvAmount.setTextColor(Color.parseColor("#00C853"))  // Verde brillante
-                ivTypeIndicator.setImageResource(android.R.drawable.arrow_up_float) // Usamos un drawable estándar
+                tvAmount.setTextColor(Color.parseColor("#00C853"))  // Verde
+                ivTypeIndicator.setImageResource(android.R.drawable.arrow_up_float)
             } else {
                 tvAmount.setTextColor(Color.RED)
-                ivTypeIndicator.setImageResource(android.R.drawable.arrow_down_float) // Usamos un drawable estándar
+                ivTypeIndicator.setImageResource(android.R.drawable.arrow_down_float)
             }
 
             // Listeners para edición y eliminación
-            btnEdit.setOnClickListener { onEdit(transaction) }
+            btnEdit.setOnClickListener   { onEdit(transaction) }
             btnDelete.setOnClickListener { onDelete(transaction) }
         }
     }

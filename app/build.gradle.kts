@@ -8,6 +8,10 @@ android {
     namespace  = "com.mod5.ae3_abpro1_mislucas"
     compileSdk = 36
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     defaultConfig {
         applicationId = "com.mod5.ae3_abpro1_mislucas"
         minSdk        = 29
@@ -70,4 +74,5 @@ dependencies {
 
     // (Opcional, pero recomendado para Fragments) Para el Fragment lifecycle scope
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
+
 }

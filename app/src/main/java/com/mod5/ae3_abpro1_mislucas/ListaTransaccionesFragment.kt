@@ -17,30 +17,32 @@ import java.util.*
 class ListaTransaccionesFragment : Fragment() {
 
     private lateinit var transactionViewModel: TransactionViewModel
-    private lateinit var adapter: TransactionAdapter
+    private lateinit var adapter             : TransactionAdapter
 
     // Elementos de Balance
-    private lateinit var tvTotalIncome: TextView
+    private lateinit var tvTotalIncome : TextView
     private lateinit var tvTotalExpense: TextView
-    private lateinit var tvBalance: TextView
+    private lateinit var tvBalance     : TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.lista_transacciones, container, false)
+        val view = inflater.inflate(R.layout.lista_transacciones,
+            container, false)
         // Inicializa el ViewModel
-        transactionViewModel = ViewModelProvider(requireActivity()).get(TransactionViewModel::class.java)
+        transactionViewModel = ViewModelProvider(
+            requireActivity()).get(TransactionViewModel::class.java)
 
         // Inicializar vistas de balance
-        tvTotalIncome = view.findViewById(R.id.tvTotalIncome)
+        tvTotalIncome  = view.findViewById(R.id.tvTotalIncome)
         tvTotalExpense = view.findViewById(R.id.tvTotalExpense)
-        tvBalance = view.findViewById(R.id.tvBalance)
+        tvBalance      = view.findViewById(R.id.tvBalance)
 
         // Configurar RecyclerView
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerViewTransactions)
         adapter = TransactionAdapter(
-            onEdit = { transaction -> navigateToEdit(transaction) },
+            onEdit   = { transaction -> navigateToEdit(transaction) },
             onDelete = { transaction -> transactionViewModel.deleteTransaction(transaction) }
         )
         recyclerView.adapter = adapter
@@ -63,8 +65,7 @@ class ListaTransaccionesFragment : Fragment() {
             }
         }
 
-        // Observa los datos del balance (Actualiza los subtotales y saldo)
-        // CRUCIAL para la reactividad de los totales
+        // Observa la actualización de datos del balance (subtotales y saldo)
         transactionViewModel.balanceData.observe(viewLifecycleOwner) { balanceData ->
             balanceData?.let {
                 updateBalanceUI(it.totalIncome, it.totalExpense, it.balance)
@@ -74,23 +75,23 @@ class ListaTransaccionesFragment : Fragment() {
         // Observa mensajes de estado (Muestra Toasts)
         transactionViewModel.statusMessage.observe(viewLifecycleOwner) { message ->
             message?.let {
-                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), it,
+                    Toast.LENGTH_SHORT).show()
                 transactionViewModel.clearStatusMessage()
             }
         }
     }
 
-    /**
-     * Actualiza la interfaz de usuario con los totales y el saldo, incluyendo el color condicional.
-     */
+    // Actualiza la interfaz de usuario con los totales y el saldo, incluyendo el color condicional.
     private fun updateBalanceUI(income: Double, expense: Double, balance: Double) {
-        val currencyFormat = NumberFormat.getCurrencyInstance(Locale("es", "CL"))
+        val currencyFormat = NumberFormat.getCurrencyInstance(Locale("es",
+            "CL"))
 
-        tvTotalIncome.text = "Ingresos: ${currencyFormat.format(income)}"
+        tvTotalIncome.text  = "Ingresos: ${currencyFormat.format(income)}"
         tvTotalExpense.text = "Gastos: ${currencyFormat.format(expense)}"
-        tvBalance.text = "SALDO: ${currencyFormat.format(balance)}"
+        tvBalance.text      = "SALDO: ${currencyFormat.format(balance)}"
 
-        // Lógica de color condicional: Rojo para negativo, verde/teal para positivo
+        // agregamos una ayuda visual para mostrar el saldo: rojo para negativo, verde para positivo
         if (balance < 0) {
             tvBalance.setTextColor(Color.RED)
         } else {
@@ -99,7 +100,8 @@ class ListaTransaccionesFragment : Fragment() {
     }
 
     private fun navigateToEdit(transaction: Transaction) {
-        (activity as? MainActivity)?.loadFragment(RegistroTransaccionFragment.newInstance(transaction))
+        (activity as? MainActivity)?.loadFragment(
+            RegistroTransaccionFragment.newInstance(transaction))
     }
 
     companion object {

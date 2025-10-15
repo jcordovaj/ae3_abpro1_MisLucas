@@ -16,27 +16,31 @@ class RegistroTransaccionFragment : Fragment() {
     private lateinit var transactionViewModel: TransactionViewModel
 
     // Vistas
-    private lateinit var editTextTitle: EditText
+    private lateinit var editTextTitle      : EditText
     private lateinit var editTextDescription: EditText
-    private lateinit var editTextAmount: EditText
-    private lateinit var editTextDate: EditText
-    private lateinit var editTextTime: EditText
-    private lateinit var spinnerType: Spinner
-    private lateinit var spinnerCategory: Spinner
-    private lateinit var buttonSave: Button
+    private lateinit var editTextAmount     : EditText
+    private lateinit var editTextDate       : EditText
+    private lateinit var editTextTime       : EditText
+    private lateinit var spinnerType        : Spinner
+    private lateinit var spinnerCategory    : Spinner
+    private lateinit var buttonSave         : Button
 
     // Variables de Estado
     private var transactionId: String? = null
-    private var selectedDate: String = ""
-    private var selectedTime: String = ""
+    private var selectedDate : String = ""
+    private var selectedTime : String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.registro_transaccion, container, false)
+        val view = inflater.inflate(
+            R.layout.registro_transaccion,
+            container,
+            false)
 
-        transactionViewModel = ViewModelProvider(requireActivity()).get(TransactionViewModel::class.java)
+        transactionViewModel =
+            ViewModelProvider(requireActivity()).get(TransactionViewModel::class.java)
 
         // Inicialización de Vistas
         editTextTitle        = view.findViewById(R.id.editTextTransactionTitle)
@@ -76,7 +80,6 @@ class RegistroTransaccionFragment : Fragment() {
         } ?: run {
             buttonSave.text = "Guardar Transacción"
         }
-
         // Listener botón grabar
         buttonSave.setOnClickListener {
             saveTransaction()
@@ -84,17 +87,22 @@ class RegistroTransaccionFragment : Fragment() {
         return view
     }
 
-    // Método para guardar la transacción, incluyendo validación.
+    // Valida y guarda la transacción.
     private fun saveTransaction() {
-        val title = editTextTitle.text.toString().trim()
+        val title       = editTextTitle.text.toString().trim()
         val description = editTextDescription.text.toString().trim()
-        val amountText = editTextAmount.text.toString().trim()
-        val type = spinnerType.selectedItem.toString()
-        val category = spinnerCategory.selectedItem.toString()
+        val amountText  = editTextAmount.text.toString().trim()
+        val type        = spinnerType.selectedItem.toString()
+        val category    = spinnerCategory.selectedItem.toString()
 
-        // 1. Validación de campos obligatorios
-        if (title.isEmpty() || amountText.isEmpty() || selectedDate.isEmpty() || selectedTime.isEmpty()) {
-            Toast.makeText(requireContext(), "Título, Monto, Fecha y Hora son obligatorios.", Toast.LENGTH_LONG).show()
+        // Valida campos obligatorios
+        if (title.isEmpty() ||
+            amountText.isEmpty() ||
+            selectedDate.isEmpty() ||
+            selectedTime.isEmpty()) {
+            Toast.makeText(requireContext(),
+                "Título, Monto, Fecha y Hora son obligatorios.",
+                Toast.LENGTH_LONG).show()
             return
         }
 
@@ -107,45 +115,50 @@ class RegistroTransaccionFragment : Fragment() {
                 return
             }
         } catch (e: NumberFormatException) {
-            Toast.makeText(requireContext(), "Monto inválido. Use formato de" +
+            Toast.makeText(requireContext(), "Monto inválido. Pruebe formato de" +
                     " números con punto decimal (ej: 5000.50).", Toast.LENGTH_LONG).show()
             return
         }
 
-        // 2. Llama al ViewModel para guardar/actualizar
+        // Llama al ViewModel para guardar/actualizar
         transactionViewModel.saveOrUpdateTransaction(
-            id = transactionId,
-            title = title,
+            id          = transactionId,
+            title       = title,
             description = description,
-            type = type,
-            category = category,
-            amount = amount,
-            date = selectedDate,
-            time = selectedTime
+            type        = type,
+            category    = category,
+            amount      = amount,
+            date        = selectedDate,
+            time        = selectedTime
         )
 
-        // 3. Navegación y limpieza
+        // recupera el foco en el main y limpia
         (activity as? MainActivity)?.loadFragment(ListaTransaccionesFragment.newInstance())
         resetFormFields()
     }
 
     private fun showDatePickerDialog() {
-        // ... (Implementación del Date Picker igual a GesTarea)
+        // Implementa el Date Picker
         val calendar   = Calendar.getInstance()
         val datePicker = DatePickerDialog(requireContext(),
             { _, selectedYear, selectedMonth, selectedDay ->
-                updateDateTimeFields(selectedYear, selectedMonth, selectedDay, -1, -1)
-            }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
+                updateDateTimeFields(selectedYear,
+                    selectedMonth, selectedDay, -1, -1)
+            }, calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH))
         datePicker.show()
     }
 
     private fun showTimePickerDialog() {
-        // ... (Implementación del Time Picker igual a GesTarea)
-        val calendar = Calendar.getInstance()
+        // Implementa el Time Picker
+        val calendar   = Calendar.getInstance()
         val timePicker = TimePickerDialog(requireContext(),
             { _, selectedHour, selectedMinute ->
-                updateDateTimeFields(-1, -1, -1, selectedHour, selectedMinute)
-            }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true)
+                updateDateTimeFields(-1, -1,
+                    -1, selectedHour, selectedMinute)
+            }, calendar.get(Calendar.HOUR_OF_DAY),
+            calendar.get(Calendar.MINUTE), true)
         timePicker.show()
     }
 
@@ -170,21 +183,21 @@ class RegistroTransaccionFragment : Fragment() {
         selectedTime = ""
         transactionId = null
 
-        // Reset Spinners to default (el primer item del array)
+        // Resetea los Spinners y los deja en el primer item del array (default)
         spinnerType.setSelection(0)
         spinnerCategory.setSelection(0)
     }
 
     companion object {
-        // Claves para argumentos de edición
-        const val TRANSACTION_ID_KEY = "trans_id"
-        const val TRANSACTION_TITLE_KEY = "trans_title"
+        // Def. de keys para pasar los argumentos de edición
+        const val TRANSACTION_ID_KEY          = "trans_id"
+        const val TRANSACTION_TITLE_KEY       = "trans_title"
         const val TRANSACTION_DESCRIPTION_KEY = "trans_description"
-        const val TRANSACTION_TYPE_KEY = "trans_type"
-        const val TRANSACTION_CATEGORY_KEY = "trans_category"
-        const val TRANSACTION_AMOUNT_KEY = "trans_amount"
-        const val TRANSACTION_DATE_KEY = "trans_date"
-        const val TRANSACTION_TIME_KEY = "trans_time"
+        const val TRANSACTION_TYPE_KEY        = "trans_type"
+        const val TRANSACTION_CATEGORY_KEY    = "trans_category"
+        const val TRANSACTION_AMOUNT_KEY      = "trans_amount"
+        const val TRANSACTION_DATE_KEY        = "trans_date"
+        const val TRANSACTION_TIME_KEY        = "trans_time"
 
         @JvmStatic
         fun newInstance(transaction: Transaction? = null): RegistroTransaccionFragment {

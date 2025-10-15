@@ -20,7 +20,7 @@ data class Transaction(
 
     companion object {
         // Cada operación de ingreso/gasto, se registra como una línea en el CSV
-        // Esta función crea un objeto Transaction a partir de una línea de CSV
+        // Esta función crea un objeto 'Transaction' a partir de una línea de CSV
         fun fromCsvString(csvString: String): Transaction? {
             return try {
                 val parts = csvString.split(',')
@@ -43,9 +43,9 @@ data class Transaction(
     }
 }
 
-// Clase utilitaria para manejar la conversión de String a Double,
-// asegurando que se use el punto (.) como separador decimal estándar,
-// independiente de la configuración regional del dispositivo.
+// Manejamos la conversión de String a Double, asegurando que se use el punto (.) como
+// separador decimal estándar, independiente de la configuración regional del dispositivo.
+// Permite que la app pueda usarse como multimoneda o servir para criptos (por el fraccionamiento)
 fun parseDouble(value: String): Double {
     return value.replace(',', '.').toDouble()
 }

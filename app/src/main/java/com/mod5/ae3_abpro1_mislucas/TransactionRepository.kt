@@ -2,12 +2,11 @@ package com.mod5.ae3_abpro1_mislucas
 
 import android.app.Application
 import java.io.*
-import java.util.UUID
 
 class TransactionRepository(application: Application) {
 
     private val context  = application
-    private val fileName = "transacciones.csv"
+    private val fileName = "transacciones.csv" // Persistencia simple
     private val file     = File(context.getExternalFilesDir(null), fileName)
 
     init {
@@ -47,7 +46,7 @@ class TransactionRepository(application: Application) {
             }
             true
         } catch (e: Exception) {
-            println("Error al escribir en el archivo CSV: ${e.message}")
+            println("Error al guardar en el archivo CSV: ${e.message}")
             false
         }
     }

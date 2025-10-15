@@ -18,15 +18,66 @@
         android:gravity="center_horizontal"
         android:layout_marginBottom="24dp" />
 
+    <!-- Campo AÑADIDO: Fecha de la Transacción -->
+    <EditText
+        android:id="@+id/et_fecha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Fecha (dd/mm/aaaa)"
+        android:inputType="date"
+        android:padding="12dp"
+        android:background="@drawable/rounded_edittext"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Campo AÑADIDO: Tipo de Transacción (Ingreso o Gasto) -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tipo de Transacción"
+        android:textSize="16sp"
+        android:textColor="#3C4043"
+        android:layout_marginBottom="8dp"/>
+
+    <RadioGroup
+        android:id="@+id/rg_tipo_transaccion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp">
+        <RadioButton
+            android:id="@+id/rb_ingreso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ingreso"
+            android:checked="true"
+            android:layout_marginEnd="16dp"/>
+        <RadioButton
+            android:id="@+id/rb_gasto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gasto"/>
+    </RadioGroup>
+
     <!-- Campo para el Monto -->
     <EditText
         android:id="@+id/et_monto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Monto (ej: 15500)"
+        android:hint="Monto (ej: 1500)"
         android:inputType="numberDecimal"
         android:padding="12dp"
         android:background="@drawable/rounded_edittext"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Selector de Categoría (Spinner) - Fondo Corregido y Mantenido -->
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/spinner_categoria"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/spinner_background_robust"
+        android:minHeight="48dp"
+        android:overlapAnchor="false"
+        android:spinnerMode="dropdown"
         android:layout_marginBottom="16dp"/>
 
     <!-- Campo para la Descripción -->
@@ -50,4 +101,11 @@
         android:backgroundTint="#1A73E8"
         android:textColor="#FFFFFF"/>
 
+    <ImageView
+        android:id="@+id/iv_logo"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/perasconmanzanas_icon"
+        android:layout_gravity="center"
+        android:alpha="0.3"  />
 </LinearLayout>

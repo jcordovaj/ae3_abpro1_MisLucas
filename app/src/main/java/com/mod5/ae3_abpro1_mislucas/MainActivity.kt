@@ -5,18 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-// Usamos View Binding (asumiendo que se configura en el build.gradle) para acceder a las vistas
 class MainActivity : AppCompatActivity() {
-
-    //private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Usamos el método tradicional para inflar el layout, ya que View Binding no está disponible
         setContentView(R.layout.activity_main)
 
-        // Carga el Fragmento inicial si es la primera vez que se crea la Activity
+        // Carga el fragmento inicial al crear la Activity
         if (savedInstanceState == null) {
             // Pasamos addToBackStack = false para que al presionar atrás no salga de la app en la vista principal
             loadFragment(ListaTransaccionesFragment.newInstance(), addToBackStack = false)
@@ -42,10 +38,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * Método central para gestionar la navegación entre Fragmentos.
-     * Es llamado por los Fragmentos cuando se necesita cambiar de vista o editar.
-     *
-     * @param fragment El nuevo Fragmento a mostrar.
+     * Gestiona la navegación entre Fragmentos.
+     * @param fragment Nuevo Fragmento a mostrar.
      * @param addToBackStack Si se añade la transacción a la pila "Atrás". Por defecto es true
      * para permitir volver al Fragmento anterior.
      */
@@ -53,11 +47,9 @@ class MainActivity : AppCompatActivity() {
         val transaction = supportFragmentManager.beginTransaction()
             // Usamos el ID del FragmentContainerView definido en activity_main.xml
             .replace(R.id.fragment_container, fragment)
-
         if (addToBackStack) {
             transaction.addToBackStack(null) // Permite volver con el botón "Atrás"
         }
-
         transaction.commit()
     }
 }

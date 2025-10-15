@@ -50,9 +50,9 @@ class TransactionViewModel(application: Application) : AndroidViewModel(applicat
 
         // manejamos montos con decimales para que sea multimoneda, redondea a dos decimales
         val roundedBalance = BalanceData(
-            totalIncome  = round(totalIncome * 100) / 100,
-            totalExpense = round(totalExpense * 100) / 100,
-            balance      = round(balance * 100) / 100
+            totalIncome    = round(totalIncome * 100) / 100,
+            totalExpense   = round(totalExpense * 100) / 100,
+            balance        = round(balance * 100) / 100
         )
 
         _balanceData.postValue(roundedBalance)
@@ -60,20 +60,20 @@ class TransactionViewModel(application: Application) : AndroidViewModel(applicat
 
     // Guarda o actualiza una transacción. Después, recarga la lista para actualizar la interfaz.
     fun saveOrUpdateTransaction(
-        id: String?,
-        title: String,
+        id         : String?,
+        title      : String,
         description: String,
-        type: String,
-        category: String,
-        amount: Double,
-        date: String,
-        time: String
+        type       : String,
+        category   : String,
+        amount     : Double,
+        date       : String,
+        time       : String
     ) {
         viewModelScope.launch(Dispatchers.IO) {
-            val isEditing = id != null
+            val isEditing     = id != null
             val transactionId = id ?: UUID.randomUUID().toString()
-            val transaction = Transaction(transactionId, title, description, type, category,
-                amount, date, time)
+            val transaction   = Transaction(transactionId, title, description, type, category,
+                                            amount, date, time)
 
             val success = if (isEditing) {
                 repository.updateTransactionInCSV(transaction)

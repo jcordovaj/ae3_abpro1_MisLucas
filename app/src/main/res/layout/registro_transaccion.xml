@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Título de la Pantalla -->
+        <!-- Título Formulario -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:hint="Título (Ej: Salario, Alquiler)">
+            android:hint="Título (Ej: Sueldo, Arriendo, Almuerzo)">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextTransactionTitle"
@@ -46,7 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:hint="Monto (CLP)"
+            android:hint="Monto"
             app:startIconDrawable="@drawable/ic_attach_money">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -57,7 +57,7 @@
                 android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Spinner Tipo (Ingreso/Gasto) -->
+        <!-- Spinner que permite escoger 'Tipo' (Ingreso/Gasto) -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -73,13 +73,14 @@
             android:entries="@array/transaction_types"
             android:layout_marginBottom="16dp"/>
 
-        <!-- Spinner Categoría -->
+        <!-- Spinner que permite 'Categoría' -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Categoría"
             android:textColor="#5F6368"
             android:layout_marginBottom="4dp"/>
+
         <Spinner
             android:id="@+id/spinnerTransactionCategory"
             android:layout_width="match_parent"
@@ -102,18 +103,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
-                android:lines="3"
+                android:lines="2"
                 android:gravity="top|start" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Date and Time Pickers -->
+        <!-- Pickers para fecha y hora -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginBottom="24dp">
 
-            <!-- Date Picker -->
+            <!-- Picker para fecha -->
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
@@ -133,7 +134,7 @@
                     android:inputType="none" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Time Picker -->
+            <!-- Picker para hora -->
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
@@ -152,6 +153,7 @@
                     android:cursorVisible="false"
                     android:inputType="none" />
             </com.google.android.material.textfield.TextInputLayout>
+
         </LinearLayout>
 
         <!-- Botón Guardar / Actualizar -->
@@ -164,6 +166,14 @@
             android:backgroundTint="#1A73E8"
             android:textColor="#FFFFFF"
             app:cornerRadius="8dp" />
+
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/perasconmanzanas_icon"
+            android:layout_gravity="center"
+            android:alpha="0.3"  />
 
     </LinearLayout>
 </ScrollView>
