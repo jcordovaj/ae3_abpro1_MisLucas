@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="6dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:gravity="center_vertical">
+
+        <!-- Indicador de Tipo/Icono de Categoría -->
+        <ImageView
+            android:id="@+id/ivTypeIndicator"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:contentDescription="Indicador de Ingreso o Gasto"
+            android:src="@android:drawable/arrow_up_float"
+            android:layout_marginEnd="12dp"
+            android:tint="#4CAF50" />
+
+        <!-- Detalles de la Transacción -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvTransactionTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Título de la Operación"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/black" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvTransactionDateTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DD/MM/YYYY - HH:MM"
+                    android:textSize="12sp"
+                    android:textColor="#808080" />
+
+                <TextView
+                    android:id="@+id/tvTransactionCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="(Categoría)"
+                    android:textSize="12sp"
+                    android:textStyle="italic"
+                    android:textColor="#607D8B" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Monto (lado derecho) -->
+        <TextView
+            android:id="@+id/tvTransactionAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$ 0.00"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginStart="8dp" />
+
+        <!-- Botones de Acción (Editar y Eliminar) -->
+        <ImageView
+            android:id="@+id/btnEdit"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@android:drawable/ic_menu_edit"
+            android:contentDescription="Editar Transacción"
+            android:tint="#9C27B0"
+            android:layout_marginStart="8dp" />
+
+        <ImageView
+            android:id="@+id/btnDelete"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@android:drawable/ic_menu_delete"
+            android:contentDescription="Eliminar Transacción"
+            android:tint="#F44336"
+            android:layout_marginStart="4dp" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

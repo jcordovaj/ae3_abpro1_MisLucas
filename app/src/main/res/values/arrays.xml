@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Tipos de transacciones (Ingreso/Gasto) -->
+    <string-array name="transaction_types">
+        <item>Gasto</item>
+        <item>Ingreso</item>
+    </string-array>
+
+    <!-- Categorías de transacciones -->
+    <string-array name="transaction_categories">
+        <item>Ocio</item>
+        <item>Supermercado</item>
+        <item>Transporte</item>
+        <item>Hogar</item>
+        <item>Trabajo</item>
+        <item>Otros</item>
+    </string-array>
+</resources>

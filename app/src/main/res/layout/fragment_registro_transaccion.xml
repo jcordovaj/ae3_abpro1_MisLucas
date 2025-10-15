@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#F8F9FA"
+    tools:context="RegistroTransaccionFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nuevo Registro de Transacción"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#3C4043"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Campo para el Monto -->
+    <EditText
+        android:id="@+id/et_monto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Monto (ej: 15500)"
+        android:inputType="numberDecimal"
+        android:padding="12dp"
+        android:background="@drawable/rounded_edittext"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Campo para la Descripción -->
+    <EditText
+        android:id="@+id/et_descripcion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Descripción (ej: Compra en supermercado)"
+        android:inputType="textCapSentences"
+        android:padding="12dp"
+        android:background="@drawable/rounded_edittext"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Botón de Guardar -->
+    <Button
+        android:id="@+id/btn_guardar_transaccion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Guardar Transacción"
+        android:padding="12dp"
+        android:backgroundTint="#1A73E8"
+        android:textColor="#FFFFFF"/>
+
+</LinearLayout>
