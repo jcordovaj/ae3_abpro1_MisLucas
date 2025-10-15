@@ -43,9 +43,13 @@ data class Transaction(
     }
 }
 
-// Manejamos la conversión de String a Double, asegurando que se use el punto (.) como
-// separador decimal estándar, independiente de la configuración regional del dispositivo.
-// Permite que la app pueda usarse como multimoneda o servir para criptos (por el fraccionamiento)
+/**
+ * Manejamos la conversión de String a Double, asegurando que se use el punto (.) como
+ * separador decimal estándar, independiente de la configuración regional del dispositivo.
+ * Permite que la app pueda usarse como multimoneda o servir, por ejemplo, como wallet para criptos
+ * (por el fraccionamiento)
+ */
+
 fun parseDouble(value: String): Double {
     return value.replace(',', '.').toDouble()
 }

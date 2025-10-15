@@ -56,12 +56,11 @@ class RegistroTransaccionFragment : Fragment() {
         editTextDate.setOnClickListener { showDatePickerDialog() }
         editTextTime.setOnClickListener { showTimePickerDialog() }
 
-        // Cargar datos si es edición
+        // Cargar datos si se edita una transacción
         arguments?.let { args ->
             transactionId = args.getString(TRANSACTION_ID_KEY)
             editTextTitle.setText(args.getString(TRANSACTION_TITLE_KEY))
             editTextDescription.setText(args.getString(TRANSACTION_DESCRIPTION_KEY))
-            // Usamos un simple String.valueOf() para el Double
             editTextAmount.setText(args.getDouble(TRANSACTION_AMOUNT_KEY).toString())
             selectedDate = args.getString(TRANSACTION_DATE_KEY) ?: ""
             selectedTime = args.getString(TRANSACTION_TIME_KEY) ?: ""

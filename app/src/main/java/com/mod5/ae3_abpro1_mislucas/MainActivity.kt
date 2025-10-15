@@ -11,17 +11,17 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //setContentView(R.layout.activity_main)
+        //Lanza la app desde el splash
         setContentView(R.layout.main_splash)
         val buttonStartApp: Button = findViewById(R.id.buttonStartApp)
         buttonStartApp.setOnClickListener {
-            setupMainLayout() // Llama a la función que inicializa la interfaz principal
+            setupMainLayout() // Llama a la función que inicializa la interfaz ppal.
         }
     }
 
     /**
      * Carga el layout principal de la aplicación y configura la navegación.
-     * Esta función se llama después de que el usuario hace clic en "Comenzar" en el splash.
+     * Nota: Se llama después de hacer clic en "Comenzar".
      */
     private fun setupMainLayout() {
         // Carga el layout principal de la aplicación (fragment_container + bottom_navigation)
@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-//**************
+
     /**
      * Gestiona la navegación entre Fragmentos.
      * @param fragment Nuevo Fragmento a mostrar.

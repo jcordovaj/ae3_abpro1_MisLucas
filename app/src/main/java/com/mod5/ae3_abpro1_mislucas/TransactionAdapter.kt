@@ -43,7 +43,7 @@ class TransactionAdapter(
             tvDate.text     = "${transaction.date} - ${transaction.time}"
             tvCategory.text = transaction.category
 
-            // Usamos formato de moneda local, permite cambiar la localización por país
+            // Usamos formato de moneda local, facilita modificar la localización por país
             val currencyFormat =
                 NumberFormat.getCurrencyInstance(Locale("es", "CL"))
             tvAmount.text = currencyFormat.format(transaction.amount)

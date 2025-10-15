@@ -34,12 +34,12 @@ class ListaTransaccionesFragment : Fragment() {
         transactionViewModel = ViewModelProvider(
             requireActivity()).get(TransactionViewModel::class.java)
 
-        // Inicializar vistas de balance
+        // Inicializa vistas de balance
         tvTotalIncome  = view.findViewById(R.id.tvTotalIncome)
         tvTotalExpense = view.findViewById(R.id.tvTotalExpense)
         tvBalance      = view.findViewById(R.id.tvBalance)
 
-        // Configurar RecyclerView
+        // Configura RecyclerView
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerViewTransactions)
         adapter = TransactionAdapter(
             onEdit   = { transaction -> navigateToEdit(transaction) },
@@ -48,31 +48,28 @@ class ListaTransaccionesFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        // Configurar Observadores (Patrón Observador con LiveData)
+        // Configura el 'Observador' con LiveData)
         setupObservers()
-
         return view
     }
 
-    /**
-     * Configura los observadores para LiveData.
-     */
+    // Configura los observadores para LiveData.
     private fun setupObservers() {
-        // Observa la lista de transacciones (Actualiza el RecyclerView)
+        // Observa la lista de transacciones (RecyclerView)
         transactionViewModel.allTransactions.observe(viewLifecycleOwner) { transactions ->
             transactions?.let {
                 adapter.submitList(it)
             }
         }
 
-        // Observa la actualización de datos del balance (subtotales y saldo)
+        // Observa las actualizaciones de datos del balance (subtotales y saldo)
         transactionViewModel.balanceData.observe(viewLifecycleOwner) { balanceData ->
             balanceData?.let {
                 updateBalanceUI(it.totalIncome, it.totalExpense, it.balance)
             }
         }
 
-        // Observa mensajes de estado (Muestra Toasts)
+        // Observa los mensajes de estado (Toasts)
         transactionViewModel.statusMessage.observe(viewLifecycleOwner) { message ->
             message?.let {
                 Toast.makeText(requireContext(), it,
@@ -86,12 +83,11 @@ class ListaTransaccionesFragment : Fragment() {
     private fun updateBalanceUI(income: Double, expense: Double, balance: Double) {
         val currencyFormat = NumberFormat.getCurrencyInstance(Locale("es",
             "CL"))
-
         tvTotalIncome.text  = "Ingresos: ${currencyFormat.format(income)}"
         tvTotalExpense.text = "Gastos: ${currencyFormat.format(expense)}"
         tvBalance.text      = "SALDO: ${currencyFormat.format(balance)}"
 
-        // agregamos una ayuda visual para mostrar el saldo: rojo para negativo, verde para positivo
+        // Ayuda visual para mostrar el saldo: rojo para negativo, verde para positivo
         if (balance < 0) {
             tvBalance.setTextColor(Color.RED)
         } else {

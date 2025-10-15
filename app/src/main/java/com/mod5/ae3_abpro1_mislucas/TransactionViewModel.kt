@@ -45,8 +45,7 @@ class TransactionViewModel(application: Application) : AndroidViewModel(applicat
     private fun calculateBalance(transactions: List<Transaction>) {
         val totalIncome  = transactions.filter { it.type == "Ingreso" }.sumOf { it.amount }
         val totalExpense = transactions.filter { it.type == "Gasto" }.sumOf { it.amount }
-
-        val balance = totalIncome - totalExpense
+        val balance      = totalIncome - totalExpense
 
         // manejamos montos con decimales para que sea multimoneda, redondea a dos decimales
         val roundedBalance = BalanceData(
