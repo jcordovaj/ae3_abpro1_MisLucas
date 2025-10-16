@@ -1,4 +1,4 @@
-# 💰 CASO AE3-ABP1 "MisLucas" V1.0: GESTOR DE FINANZAS - ARQUITECTURA MVVM Y REACTIVIDAD
+# 💰 CASO AE3-ABPRO1 "MisLucas" V1.0: GESTOR DE FINANZAS - ARQUITECTURA MVVM Y REACTIVIDAD
 
 <p float="center">
   <img src="scrapbook/perasconmanzanas_icon.png" alt="Logo" width="200"/>
